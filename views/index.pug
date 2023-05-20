@@ -1,5 +1,10 @@
-extends layout
+extends layout.pug
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #sidebar-container
+    include sidebar.pug
+  #main-content
+    h1= 'Home Page'
+    ul
+      li Category Count: !{categories.length}
+      li Note Count: !{note_count}
