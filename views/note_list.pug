@@ -1,0 +1,12 @@
+extends layout
+
+block content 
+
+  #sidebar-container
+    include sidebar.pug
+  #main-content
+    div.note-card-container
+        each note in notes
+            div.note-card
+                h2.note-title #{note.title}
+                p.note-details #{note.details}
