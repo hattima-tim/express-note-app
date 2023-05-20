@@ -4,4 +4,4 @@ nav#sidebar
       a(href='/') Home
     each category in categories
       li(class=(selectedCategory === category.name ? "active" : ""))
-        a(href=`/catagory/${catagory._id}`) #{category.name}
+        a(href=`/category/${category._id}`) #{category.name}
