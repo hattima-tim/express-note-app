@@ -1,8 +1,37 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+#sidebar {
+  background-color: black;
+  width: 250px;
+  height: 100%;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  padding-top:2rem;
+  margin: 0;
+}
+
+#sidebar li {
+  padding: 10px;
+  padding-left: 2rem;
+}
+
+#sidebar li.active {
+  background-color: #343a40;
+}
+
+#sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+#main-content {
+  flex-grow: 1;
+  padding: 20px;
 }
