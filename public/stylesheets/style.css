@@ -35,3 +35,28 @@ body {
   flex-grow: 1;
   padding: 20px;
 }
+
+.note-card-container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:1rem;
+}
+
+.note-card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.note-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.note-details {
+  font-size: 16px;
+}
