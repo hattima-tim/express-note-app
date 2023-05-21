@@ -1,0 +1,26 @@
+extends layout
+
+block css
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/noteForm.css')
+
+block content
+
+  #sidebar-container
+    include sidebar.pug
+  #main-content
+    h1= title
+    .container
+      form
+        .row
+          .col-25
+            label(for='title') Title:
+          .col-75
+            input(type='text', id='title', name='title')
+        .row
+          .col-25
+            label(for='details') Details:
+          .col-75
+            textarea(id='details', name='details')
+        .row
+          input(type='submit', value='Submit')
