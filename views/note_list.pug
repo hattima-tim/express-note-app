@@ -7,6 +7,7 @@ block content
   #main-content
     div.note-card-container
         each note in notes
+          a(href=selectedCategoryId+'/note/'+note._id)
             div.note-card
                 h2.note-title #{note.title}
                 p.note-details #{note.details}
