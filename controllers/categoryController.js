@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 exports.note_list = asyncHandler(async (req, res, next) => {
   const [selectedCategory, categories, catergoryNotes] = await Promise.all([
-    Category.findById(req.params.id, "name").orFail(
+    Category.findById(req.params.id).orFail(
       new Error("Category not found.")
     ),
     Category.find(),
@@ -15,6 +15,16 @@ exports.note_list = asyncHandler(async (req, res, next) => {
     title: "Notes",
     categories: categories,
     selectedCategory: selectedCategory.name,
+    selectedCategoryId:selectedCategory._id,
     notes: catergoryNotes,
   });
+});
+
+exports.note_create_get = asyncHandler(async (req, res, next) => {
+  const categories = await Category.find();
+
+  res.render('note_form',{
+    title:'Create Note',
+    categories:categories
+  })
 });
