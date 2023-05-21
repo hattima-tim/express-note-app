@@ -10,8 +10,4 @@ const CatagorySchema = new Schema({
   },
 });
 
-CatagorySchema.virtual("url").get(function () {
-  return `catagory/${this._id}`;
-});
-
 module.exports = mongoose.model("Catagory", CatagorySchema);
