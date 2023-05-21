@@ -11,16 +11,20 @@ block content
   #main-content
     h1= title
     .container
-      form
+      form(method='POST' action='')
         .row
           .col-25
             label(for='title') Title:
           .col-75
-            input(type='text', id='title', name='title')
+            input(type='text', id='title', name='title' value=(noteTitle?noteTitle:''))
         .row
           .col-25
             label(for='details') Details:
           .col-75
-            textarea(id='details', name='details')
+            textarea(id='details', name='details') !{details?details:''}
         .row
           input(type='submit', value='Submit')
+    if errors
+      ul
+        each error in errors
+          li= error.msg
