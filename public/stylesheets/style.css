@@ -60,3 +60,12 @@ body {
 .note-details {
   font-size: 16px;
 }
+
+.createBtn{
+  float: right;
+  padding: 10px 20px;
+  background-color: black;
+  color:white;
+  text-decoration: none;
+  border-radius: 5px;
+}
