@@ -13,6 +13,7 @@ block content
   #main-content
     div.note_detail_header
       h1= title
-      <i class="fa-solid fa-pen-to-square fa-spin"></i>
+      a(href=note._id+"/update") 
+        <i class="fa-solid fa-pen-to-square fa-spin"></i>
     hr
     article #{note.details}
