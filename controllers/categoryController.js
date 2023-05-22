@@ -82,3 +82,21 @@ exports.note_detail = asyncHandler(async (req, res, next) => {
     note: note,
   });
 });
+
+exports.note_update_get = asyncHandler(async (req, res, next) => {
+  const [categories, selectedCategory, note] = await Promise.all([
+    Category.find(),
+    Category.findById(req.params.categoryId).orFail(
+      new Error("Category not found.")
+    ),
+    Note.findById(req.params.noteId).orFail(new Error("Note not found.")),
+  ]);
+
+  res.render("note_form", {
+    title: "Update Note",
+    categories: categories,
+    selectedCategory:selectedCategory.name,
+    noteTitle: note.title,
+    details: note.details,
+  });
+});
