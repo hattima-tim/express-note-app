@@ -1,0 +1,13 @@
+.note_detail_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0px;
+}
+
+.fa-pen-to-square {
+  cursor: pointer;
+}
