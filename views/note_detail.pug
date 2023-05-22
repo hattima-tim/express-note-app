@@ -1,10 +1,18 @@
 extends layout
 
+block css
+  link(rel="stylesheet", href="/stylesheets/style.css")
+  link(rel="stylesheet", href="/stylesheets/noteDetail.css")  
+block script
+  <script src="https://kit.fontawesome.com/53348e0e14.js" crossorigin="anonymous"></script>
+
 block content
 
   #sidebar-container
     include sidebar.pug
   #main-content
-    h1= title
+    div.note_detail_header
+      h1= title
+      <i class="fa-solid fa-pen-to-square fa-spin"></i>
     hr
     article #{note.details}
