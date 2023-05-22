@@ -20,11 +20,15 @@ exports.note_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.note_create_get = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find();
+  const [categories, selectedCategory] = await Promise.all([
+    Category.find(),
+    Category.findById(req.params.id),
+  ]);
 
   res.render("note_form", {
     title: "Create Note",
     categories: categories,
+    selectedCategory: selectedCategory.name,
   });
 });
 
@@ -64,17 +68,17 @@ exports.note_create_post = [
   }),
 ];
 
-exports.note_detail = asyncHandler(async(req,res,next)=>{
-  const [categories,selectedCategory,note] = await Promise.all([
+exports.note_detail = asyncHandler(async (req, res, next) => {
+  const [categories, selectedCategory, note] = await Promise.all([
     Category.find(),
     Category.findById(req.params.categoryId),
-    Note.findById(req.params.noteId).orFail(new Error('Note not found'))
+    Note.findById(req.params.noteId).orFail(new Error("Note not found")),
   ]);
 
   res.render("note_detail", {
     title: `${note.title}`,
-    categories:categories,
-    selectedCategory:selectedCategory.name,
-    note:note
+    categories: categories,
+    selectedCategory: selectedCategory.name,
+    note: note,
   });
-})
+});
