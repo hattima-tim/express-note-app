@@ -13,7 +13,11 @@ block content
   #main-content
     div.note_detail_header
       h1= title
-      a(href=note._id+"/update") 
-        <i class="fa-solid fa-pen-to-square fa-spin"></i>
+      div.action_icons
+        a(href=note._id+"/update") 
+          <i class="fa-solid fa-pen-to-square fa-spin"></i>
+        form(method='POST' action=note._id+'/delete')
+          button(type='submit')
+           <i class="fa-solid fa-trash"></i>
     hr
     article #{note.details}
