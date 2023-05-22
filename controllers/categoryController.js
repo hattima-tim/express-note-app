@@ -63,3 +63,18 @@ exports.note_create_post = [
     }
   }),
 ];
+
+exports.note_detail = asyncHandler(async(req,res,next)=>{
+  const [categories,selectedCategory,note] = await Promise.all([
+    Category.find(),
+    Category.findById(req.params.categoryId),
+    Note.findById(req.params.noteId).orFail(new Error('Note not found'))
+  ]);
+
+  res.render("note_detail", {
+    title: `${note.title}`,
+    categories:categories,
+    selectedCategory:selectedCategory.name,
+    note:note
+  });
+})
