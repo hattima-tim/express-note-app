@@ -137,3 +137,10 @@ exports.note_update_post = [
     }
   }),
 ];
+
+exports.note_delete_post = asyncHandler(async (req, res, next) => {
+  await Note.findByIdAndDelete(req.params.noteId).orFail(
+    new Error("Note not found.")
+  );
+  res.redirect(`/category/${req.params.categoryId}`);
+});
