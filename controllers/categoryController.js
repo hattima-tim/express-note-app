@@ -95,8 +95,45 @@ exports.note_update_get = asyncHandler(async (req, res, next) => {
   res.render("note_form", {
     title: "Update Note",
     categories: categories,
-    selectedCategory:selectedCategory.name,
+    selectedCategory: selectedCategory.name,
     noteTitle: note.title,
     details: note.details,
   });
 });
+
+exports.note_update_post = [
+  body("title", "Title must have atleast three characters.")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+  body("details", "Details must have atleast three characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req).array();
+
+    const updatedNote = new Note({
+      title: req.body.title,
+      details: req.body.details,
+      catagory: req.params.categoryId,
+      _id: req.params.noteId,
+    });
+
+    if (errors.length > 0) {
+      const categories = await Category.find();
+
+      res.render("note_form", {
+        title: "Create Note",
+        categories: categories,
+        noteTitle: req.body.title,
+        details: req.body.details,
+        errors: errors,
+      });
+    } else {
+      await Note.findByIdAndUpdate(req.params.noteId, updatedNote);
+      res.redirect(`/category/${req.params.categoryId}`);
+    }
+  }),
+];
