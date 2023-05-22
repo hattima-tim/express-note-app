@@ -21,7 +21,7 @@ block content
           .col-25
             label(for='details') Details:
           .col-75
-            textarea(id='details', name='details') !{details?details:''}
+            textarea(id='details', name='details', rows='15') !{details?details:''}
         .row
           input(type='submit', value='Submit')
     if errors
