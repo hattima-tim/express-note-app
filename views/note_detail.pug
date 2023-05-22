@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+  #sidebar-container
+    include sidebar.pug
+  #main-content
+    h1= title
+    hr
+    article #{note.details}
