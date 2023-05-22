@@ -6,5 +6,6 @@ const category_controller = require("../controllers/categoryController");
 router.get("/:id", category_controller.note_list);
 router.get("/:id/create", category_controller.note_create_get);
 router.post("/:id/create", category_controller.note_create_post);
+router.get('/:categoryId/note/:noteId',category_controller.note_detail)
 
 module.exports = router;
