@@ -5,3 +5,6 @@ nav#sidebar
     each category in categories
       li(class=(selectedCategory === category.name ? "active" : ""))
         a(href=`/category/${category._id}`) #{category.name}
+        div(style=(`display: ${selectedCategory === category.name ?'flex':'none'}`))
+          <i class="fa-solid fa-pen-to-square"></i>
+          <i class="fa-solid fa-trash"></i>
