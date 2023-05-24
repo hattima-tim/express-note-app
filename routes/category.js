@@ -26,7 +26,7 @@ router.post(
   category_controller.note_delete_post
 );
 
-router.post(
-  '/:id/update',category_controller.category_update_post
-)
+router.post("/:id/update", category_controller.category_update_post);
+
+router.post("/:id/delete", category_controller.category_delete_post);
 module.exports = router;
