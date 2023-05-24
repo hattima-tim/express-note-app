@@ -20,7 +20,7 @@ nav#sidebar
       
       function showCategoryEditForm(item){
         const categoryId = item.getAttribute('data-category-id');
-        const formToBeAddedStr = `<form method='POST' action=/category/${categoryId}/update>` +
+        const formToBeAddedStr = `<form method='POST' class='categoryUpdateForm' action=/category/${categoryId}/update>` +
           "<input type='text' name='categoryName' value='" + listItem.childNodes[0].textContent + "'/>" +
           "<button type='submit'><i class='fa-solid fa-check fa-xl' style='color: #4e9a06;'></i></button>" +
           "<i onClick='removeForm()' class='fa-solid fa-xmark fa-lg' style='color: #ff0000;'></i>" +
