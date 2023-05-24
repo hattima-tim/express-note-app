@@ -183,3 +183,13 @@ exports.category_update_post = [
     }
   }),
 ];
+
+exports.category_delete_post = asyncHandler(async (req, res, next) => {
+  await Category.findByIdAndDelete(req.params.id).orFail(
+    new Error("Something went wrong.")
+  );
+  
+  await Note.deleteMany({catagory:req.params.id})
+
+  res.redirect(`/`);
+});
