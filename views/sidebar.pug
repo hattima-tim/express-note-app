@@ -8,14 +8,14 @@ nav#sidebar
         div(style=`display: ${selectedCategory === category.name ?'flex':'none'}`)
           <i onClick='showCategoryEditForm(this)' data-category-id='#{category._id}' class="fa-solid fa-pen-to-square"></i>
           form(method='POST' action=`/category/${category._id}/delete`)
-            button(type='submit') 
+            button.category_delete_btn(type='submit') 
               <i class="fa-solid fa-trash"></i>
       
       if errors
         ul(style=`display: ${selectedCategory === category.name ?'flex':'none'};color: rebeccapurple;padding:0px`)
           each error in errors
             li= error.msg
-    
+
     script.
       const listItem = document.querySelector('.active')
       let formToBeAddedHtml;
