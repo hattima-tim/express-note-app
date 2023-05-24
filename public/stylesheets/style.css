@@ -91,7 +91,7 @@ svg {
   cursor: pointer;
 }
 
-#sidebar form {
+.categoryUpdateForm {
   display: flex;
   width: 100%;
   padding-left: 2rem;
