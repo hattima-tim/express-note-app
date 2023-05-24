@@ -13,7 +13,7 @@ body {
 #sidebar ul {
   list-style-type: none;
   padding: 0;
-  padding-top:2rem;
+  padding-top: 2rem;
   margin: 0;
 }
 
@@ -37,10 +37,10 @@ body {
   padding: 20px;
 }
 
-.note-card-container{
+.note-card-container {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap:1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .note-card {
@@ -62,26 +62,26 @@ body {
   font-size: 16px;
 }
 
-.createBtn{
+.createBtn {
   float: right;
   padding: 10px 20px;
   background-color: black;
-  color:white;
+  color: white;
   text-decoration: none;
   border-radius: 5px;
 }
 
-a{
+a {
   color: black;
   text-decoration: none;
 }
 
-.active{
+.active {
   display: flex;
   justify-content: space-between;
 }
 
-.active div{
+.active div {
   align-items: center;
   gap: 1rem;
   justify-content: space-between;
@@ -89,4 +89,22 @@ a{
 
 svg {
   cursor: pointer;
+}
+
+#sidebar form {
+  display: flex;
+  width: 100%;
+  padding-left: 2rem;
+  align-items: center;
+}
+
+#sidebar input[type="text"] {
+  width: 60%;
+  height: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+#sidebar button {
+  background: none;
+  border: none;
 }
