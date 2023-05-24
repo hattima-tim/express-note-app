@@ -144,3 +144,42 @@ exports.note_delete_post = asyncHandler(async (req, res, next) => {
   );
   res.redirect(`/category/${req.params.categoryId}`);
 });
+
+exports.category_update_post = [
+  body("categoryName")
+    .trim()
+    .isLength({ min: 3, max: 20 })
+    .withMessage("- The name must have minimum 3 char and maximum 20 char.")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req).array();
+
+    if (errors.length > 0) {
+      const [selectedCategory, categories, catergoryNotes] = await Promise.all([
+        Category.findById(req.params.id).orFail(
+          new Error("Category not found.")
+        ),
+        Category.find(),
+        Note.find({ catagory: req.params.id }),
+      ]);
+
+      res.render("note_list", {
+        title: "Notes",
+        categories: categories,
+        selectedCategory: selectedCategory.name,
+        selectedCategoryId: selectedCategory._id,
+        notes: catergoryNotes,
+        errors: errors,
+      });
+    } else {
+      const updatedCategory = new Category({
+        name: req.body.categoryName,
+        _id: req.params.id,
+      });
+
+      await Category.findByIdAndUpdate(req.params.id, updatedCategory);
+      res.redirect(`/category/${req.params.id}`);
+    }
+  }),
+];
