@@ -29,4 +29,8 @@ router.post(
 router.post("/:id/update", category_controller.category_update_post);
 
 router.post("/:id/delete", category_controller.category_delete_post);
+
+router.post(/.*createcategory$/,category_controller.category_create_post);
+//  will match any URL that ends with "createcategory" 
+
 module.exports = router;
