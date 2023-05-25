@@ -4,6 +4,14 @@ block content
   #sidebar-container
     include sidebar.pug
   #main-content
+    nav
+      if currentUser
+        form(method='POST' action='/log-out')
+          button Log Out
+      else
+        a(href='/sign-up') Sign Up
+        a(href='/log-in') Log In
+      
     h1= 'Home Page'
     ul
       li Category Count: !{categories.length}
