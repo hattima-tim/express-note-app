@@ -15,3 +15,7 @@ exports.index = asyncHandler(async (req, res, next) => {
     note_count: numNotes,
   });
 });
+
+exports.sign_up_get=(req,res,next)=>{
+  res.render('authentication_form',{actionTitle:'Sign Up'})
+}
