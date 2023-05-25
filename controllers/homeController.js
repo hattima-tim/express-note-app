@@ -19,3 +19,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 exports.sign_up_get=(req,res,next)=>{
   res.render('authentication_form',{actionTitle:'Sign Up'})
 }
+
+exports.log_in_get = (req, res, next) => {
+  res.render("authentication_form", { actionTitle: "Log In" });
+};
