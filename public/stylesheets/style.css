@@ -98,6 +98,11 @@ svg {
   align-items: center;
 }
 
+.categoryUpdateForm button{
+  background: none;
+  border: none;
+}
+
 #sidebar input[type="text"] {
   width: 60%;
   height: 1.5rem;
