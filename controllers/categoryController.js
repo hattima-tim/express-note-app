@@ -188,8 +188,47 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
   await Category.findByIdAndDelete(req.params.id).orFail(
     new Error("Something went wrong.")
   );
-  
-  await Note.deleteMany({catagory:req.params.id})
+
+  await Note.deleteMany({ catagory: req.params.id });
 
   res.redirect(`/`);
 });
+
+exports.category_create_post = [
+  body("categoryName")
+    .trim()
+    .isLength({ min: 3, max: 16 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req).array();
+    if (errors.length > 0) {
+      const currentPath = req.originalUrl;
+
+      if (currentPath === "/category/createcategory") {
+        res.redirect("/");
+      } else {
+        req.originalUrl.includes("update")
+          ? res.redirect(req.originalUrl.replace(/update\/createcategory$/, ""))
+          : res.redirect(req.originalUrl.replace(/createcategory$/, ""));
+        // 'update' url has no get controller registered,
+        // hence I am removing it from the url
+      }
+    } else {
+      const [isTheCategoryExist] = await Category.find({
+        name: req.body.categoryName,
+      });
+
+      if (isTheCategoryExist) {
+        res.redirect(`/category/${isTheCategoryExist._id}`);
+      } else {
+        const newCategory = new Category({
+          name: req.body.categoryName,
+        });
+
+        await newCategory.save();
+        res.redirect(`/category/${newCategory._id}`);
+      }
+    }
+  }),
+];
