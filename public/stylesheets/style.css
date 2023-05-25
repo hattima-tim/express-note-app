@@ -113,3 +113,26 @@ svg {
   background: none;
   border: none;
 }
+
+.create_category_btn {
+  background: rebeccapurple;
+  color: white;
+  padding: 0.5rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.categoryCreateForm {
+  margin: 1rem 0rem 0rem 2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.categoryCreateForm button {
+  background: none;
+  border: none;
+}
