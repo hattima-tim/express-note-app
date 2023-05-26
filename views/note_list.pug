@@ -12,3 +12,12 @@ block content
                 h2.note-title #{note.title}
                 p.note-details #{note.details}
     a.createBtn(href=selectedCategoryId+'/create') Create Note
+  script.
+    const createBtn = document.querySelector('.createBtn');
+    const notesContainer = document.querySelector('.note-card-container');
+    const notesCount = notesContainer.childElementCount;
+    if(notesCount<3){
+      createBtn.classList.add('fixed_position');
+    }else{
+      createBtn.classList.remove('fixed_position');
+    }
