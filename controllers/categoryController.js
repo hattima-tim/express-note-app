@@ -6,8 +6,8 @@ const { body, validationResult } = require("express-validator");
 exports.note_list = asyncHandler(async (req, res, next) => {
   const [selectedCategory, categories, catergoryNotes] = await Promise.all([
     Category.findById(req.params.id).orFail(new Error("Category not found.")),
-    Category.find(),
-    Note.find({ catagory: req.params.id }),
+    Category.find({ user: req.user._id }),
+    Note.find({ catagory: req.params.id, user: req.user._id }),
   ]);
 
   res.render("note_list", {
@@ -21,7 +21,7 @@ exports.note_list = asyncHandler(async (req, res, next) => {
 
 exports.note_create_get = asyncHandler(async (req, res, next) => {
   const [categories, selectedCategory] = await Promise.all([
-    Category.find(),
+    Category.find({ user: req.user._id }),
     Category.findById(req.params.id),
   ]);
 
@@ -49,10 +49,11 @@ exports.note_create_post = [
       title: req.body.title,
       details: req.body.details,
       catagory: req.params.id,
+      user: req.user._id,
     });
 
     if (errors.length > 0) {
-      const categories = await Category.find();
+      const categories = await Category.find({ user: req.user._id });
 
       res.render("note_form", {
         title: "Create Note",
@@ -70,7 +71,7 @@ exports.note_create_post = [
 
 exports.note_detail = asyncHandler(async (req, res, next) => {
   const [categories, selectedCategory, note] = await Promise.all([
-    Category.find(),
+    Category.find({ user: req.user._id }),
     Category.findById(req.params.categoryId),
     Note.findById(req.params.noteId).orFail(new Error("Note not found")),
   ]);
@@ -85,7 +86,7 @@ exports.note_detail = asyncHandler(async (req, res, next) => {
 
 exports.note_update_get = asyncHandler(async (req, res, next) => {
   const [categories, selectedCategory, note] = await Promise.all([
-    Category.find(),
+    Category.find({ user: req.user._id }),
     Category.findById(req.params.categoryId).orFail(
       new Error("Category not found.")
     ),
@@ -118,11 +119,12 @@ exports.note_update_post = [
       title: req.body.title,
       details: req.body.details,
       catagory: req.params.categoryId,
+      user: req.user._id,
       _id: req.params.noteId,
     });
 
     if (errors.length > 0) {
-      const categories = await Category.find();
+      const categories = await Category.find({ user: req.user._id });
 
       res.render("note_form", {
         title: "Create Note",
@@ -160,8 +162,8 @@ exports.category_update_post = [
         Category.findById(req.params.id).orFail(
           new Error("Category not found.")
         ),
-        Category.find(),
-        Note.find({ catagory: req.params.id }),
+        Category.find({ user: req.user._id }),
+        Note.find({ catagory: req.params.id, user: req.user._id }),
       ]);
 
       res.render("note_list", {
@@ -175,6 +177,7 @@ exports.category_update_post = [
     } else {
       const updatedCategory = new Category({
         name: req.body.categoryName,
+        user: req.user._id,
         _id: req.params.id,
       });
 
@@ -195,10 +198,7 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_create_post = [
-  body("categoryName")
-    .trim()
-    .isLength({ min: 3, max: 16 })
-    .escape(),
+  body("categoryName").trim().isLength({ min: 3, max: 16 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req).array();
@@ -217,6 +217,7 @@ exports.category_create_post = [
     } else {
       const [isTheCategoryExist] = await Category.find({
         name: req.body.categoryName,
+        user: req.user._id,
       });
 
       if (isTheCategoryExist) {
@@ -224,6 +225,7 @@ exports.category_create_post = [
       } else {
         const newCategory = new Category({
           name: req.body.categoryName,
+          user: req.user._id,
         });
 
         await newCategory.save();
