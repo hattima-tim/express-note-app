@@ -7,9 +7,19 @@ const { body, validationResult } = require("express-validator");
 const passport = require("passport");
 
 exports.index = asyncHandler(async (req, res, next) => {
+  if (!req.user) {
+    res.render("index", {
+      title: "Home",
+      categories: [],
+      selectedCategory: "Home",
+      note_count: 0,
+    });
+    return;
+  }
+
   const [categories, numNotes] = await Promise.all([
-    Catagory.find(),
-    Note.countDocuments(),
+    Catagory.find({user:req.user._id}),
+    Note.countDocuments({user:req.user._id}),
   ]);
 
   res.render("index", {
@@ -84,4 +94,4 @@ exports.log_out = (req, res, next) => {
     }
     res.redirect("/");
   });
-}
+};
