@@ -73,6 +73,12 @@ body {
   border-radius: 5px;
 }
 
+.createBtn.fixed_position{
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+}
+
 a {
   color: black;
   text-decoration: none;
