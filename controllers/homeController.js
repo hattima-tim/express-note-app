@@ -4,6 +4,7 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bycript = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+const passport = require("passport");
 
 exports.index = asyncHandler(async (req, res, next) => {
   const [categories, numNotes] = await Promise.all([
@@ -24,7 +25,9 @@ exports.sign_up_get = (req, res, next) => {
 };
 
 exports.log_in_get = (req, res, next) => {
-  res.render("authentication_form", { actionTitle: "Log In" });
+  const errors = req.flash("error");
+
+  res.render("authentication_form", { actionTitle: "Log In", errors: errors });
 };
 
 exports.sign_up_post = [
@@ -44,7 +47,7 @@ exports.sign_up_post = [
     if (errors.length > 0) {
       res.render("authentication_form", {
         actionTitle: "Sign Up",
-        errors:errors
+        errors: errors,
       });
       return;
     }
@@ -67,3 +70,9 @@ exports.sign_up_post = [
     });
   }),
 ];
+
+exports.log_in_post = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/log-in",
+  failureFlash: true,
+});
