@@ -17,6 +17,11 @@ const NoteSchema = new Schema({
     ref: "Catagory",
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 NoteSchema.virtual("url").get(function () {
