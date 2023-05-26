@@ -11,6 +11,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
 const bycript = require("bcryptjs");
 const compression = require("compression");
+const helmet = require("helmet");
 
 const User = require('./models/user')
 
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use(compression()); // Compress all routes
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
+app.use(helmet());
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
