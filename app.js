@@ -8,6 +8,9 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const flash = require("connect-flash");
+
+const User = require('./models/user')
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -32,6 +35,42 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(flash());
+
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      const passwordMatchesTheHashedPass = await bycript.compare(
+        password,
+        user.password
+      );
+
+      if (!passwordMatchesTheHashedPass) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  })
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 app.use(
   session({
@@ -42,6 +81,11 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
