@@ -18,8 +18,8 @@ exports.index = asyncHandler(async (req, res, next) => {
   }
 
   const [categories, numNotes] = await Promise.all([
-    Catagory.find({user:req.user._id}),
-    Note.countDocuments({user:req.user._id}),
+    Catagory.find({ user: req.user._id }),
+    Note.countDocuments({ user: req.user._id }),
   ]);
 
   res.render("index", {
@@ -81,11 +81,15 @@ exports.sign_up_post = [
   }),
 ];
 
-exports.log_in_post = passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/log-in",
-  failureFlash: true,
-});
+exports.log_in_post = [
+  body("username").escape(),
+  body("password").escape(),
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/log-in",
+    failureFlash: true,
+  }),
+];
 
 exports.log_out = (req, res, next) => {
   req.logOut((err) => {
