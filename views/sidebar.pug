@@ -15,8 +15,8 @@ nav#sidebar
         ul(style=`display: ${selectedCategory === category.name ?'flex':'none'};color: rebeccapurple;padding:0px`)
           each error in errors
             li= error.msg
-
-  button.create_category_btn(onClick='showCategoryCreateForm(this)') Create
+  if currentUser
+    button.create_category_btn(onClick='showCategoryCreateForm(this)') Create
 
     script.
       const activeListItem = document.querySelector(".active");
