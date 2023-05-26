@@ -9,6 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
+const bycript = require("bcryptjs");
 
 const User = require('./models/user')
 
