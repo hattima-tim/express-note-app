@@ -7,7 +7,7 @@ html(lang="en")
     h1= actionTitle
     form(action="", method="POST")
       label(for="username") Username
-      input(name="username" placeholder="username" type="text")
+      input(name="username" minlength='3' required placeholder="username" type="text")
       label(for="password") Password
-      input(name="password" type="password")
+      input(name="password" minlength='8' required placeholder='password' type="password")
       button= actionTitle
