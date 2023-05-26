@@ -12,8 +12,9 @@ const flash = require("connect-flash");
 const bycript = require("bcryptjs");
 const compression = require("compression");
 const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 
-const User = require('./models/user')
+const User = require("./models/user");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -41,6 +42,14 @@ app.use(compression()); // Compress all routes
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 app.use(helmet());
+
+// Set up rate limiter: maximum of twenty requests per minute
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 50,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
