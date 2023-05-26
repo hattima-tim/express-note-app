@@ -136,3 +136,18 @@ svg {
   background: none;
   border: none;
 }
+
+#main-content nav{
+  display: flex;
+  justify-content: flex-end;
+  gap:1rem;
+}
+
+nav button{
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: .5rem;
+  cursor: pointer;
+}
