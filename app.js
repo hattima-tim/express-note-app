@@ -13,6 +13,7 @@ const bycript = require("bcryptjs");
 const compression = require("compression");
 const helmet = require("helmet");
 const RateLimit = require("express-rate-limit");
+const MongoStore = require('connect-mongo');
 
 const User = require("./models/user");
 
@@ -88,9 +89,13 @@ passport.deserializeUser(async function (id, done) {
 
 app.use(
   session({
+    store: MongoStore.create({
+      mongoUrl: process.env.mongodbUrl,
+      ttl: 14 * 24 * 60 * 60,
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 app.use(passport.initialize());
