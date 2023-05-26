@@ -1,6 +1,9 @@
 const Catagory = require("../models/catagory");
 const Note = require("../models/note");
+const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
+const bycript = require("bcryptjs");
+const { body, validationResult } = require("express-validator");
 
 exports.index = asyncHandler(async (req, res, next) => {
   const [categories, numNotes] = await Promise.all([
@@ -16,10 +19,51 @@ exports.index = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.sign_up_get=(req,res,next)=>{
-  res.render('authentication_form',{actionTitle:'Sign Up'})
-}
+exports.sign_up_get = (req, res, next) => {
+  res.render("authentication_form", { actionTitle: "Sign Up" });
+};
 
 exports.log_in_get = (req, res, next) => {
   res.render("authentication_form", { actionTitle: "Log In" });
 };
+
+exports.sign_up_post = [
+  body("username")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("The username must have atleast 3 characters.")
+    .escape(),
+  body("password")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("The password must have 8 characters.")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req).array();
+    if (errors.length > 0) {
+      res.render("authentication_form", {
+        actionTitle: "Sign Up",
+        errors:errors
+      });
+      return;
+    }
+
+    const { username, password } = req.body;
+    const hashedPassword = await bycript.hash(password, 10);
+
+    const user = new User({
+      username: username,
+      password: hashedPassword,
+    });
+
+    await user.save();
+    req.login(user, (err) => {
+      if (err) {
+        res.status(401).send("User not authenticated");
+      } else {
+        res.redirect("/");
+      }
+    });
+  }),
+];
