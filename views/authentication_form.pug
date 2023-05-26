@@ -11,3 +11,7 @@ html(lang="en")
       label(for="password") Password
       input(name="password" minlength='8' required placeholder='password' type="password")
       button= actionTitle
+    if errors
+      ul
+        each error in errors
+          li= error.msg
