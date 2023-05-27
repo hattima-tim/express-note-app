@@ -2,16 +2,20 @@ doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     title
-  body
-    h1= actionTitle
-    form(action="", method="POST")
-      label(for="username") Username
-      input(name="username" minlength='3' required placeholder="username" type="text")
-      label(for="password") Password
-      input(name="password" minlength='8' required placeholder='password' type="password")
-      button= actionTitle
-    if errors
-      ul
-        each error in errors
-          li= error.msg
+    block css
+      link(rel='stylesheet', href='/stylesheets/authenticationForm.css')
+
+    body
+      h1= actionTitle
+      form(action="", method="POST")
+        label(for="username") Username
+        input(name="username" minlength='3' required placeholder="username" type="text")
+        label(for="password") Password
+        input(name="password" minlength='8' required placeholder='password' type="password")
+        button= actionTitle
+      if errors
+        ul
+          each error in errors
+            li= error.msg
