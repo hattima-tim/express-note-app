@@ -42,7 +42,11 @@ app.use(cookieParser());
 app.use(compression()); // Compress all routes
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 // Set up rate limiter: maximum of twenty requests per minute
 const limiter = RateLimit({
