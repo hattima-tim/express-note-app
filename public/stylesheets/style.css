@@ -119,6 +119,7 @@ svg {
   width: 60%;
   height: 1.5rem;
   padding-left: 0.5rem;
+  color: white;
 }
 
 .category_delete_btn {
