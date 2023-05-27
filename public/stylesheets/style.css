@@ -166,7 +166,7 @@ nav button {
   cursor: pointer;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   #sidebar {
     transition: left 0.5s;
     left: -238px;
