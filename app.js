@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 app.use(
   helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: false, // this is temporary, I may change it later
   })
 );
 
