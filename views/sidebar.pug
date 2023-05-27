@@ -1,4 +1,5 @@
 nav#sidebar
+  <i onClick='showSidebar(this)' class="fa-solid fa-bars" style="color: #2e3436;"></i>
   ul
     li(class=(selectedCategory==='Home'?'active':''))
       a(href='/') Home
@@ -68,4 +69,17 @@ nav#sidebar
 
       function removeCreateForm() {
         createCategoryFormHtml.parentNode.removeChild(createCategoryFormHtml);
+      }
+
+      let isSidebarShown = false;
+      function showSidebar(icon){
+        const sidebar = document.querySelector('#sidebar');
+        
+        if(!isSidebarShown){
+          sidebar.style.left = '0px'
+          isSidebarShown= true;
+        }else{
+          sidebar.style.left='-220px'
+          isSidebarShown = false;
+        }
       }
