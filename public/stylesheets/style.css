@@ -166,6 +166,11 @@ nav button {
   cursor: pointer;
 }
 
+.home_image{
+  float: right;
+  margin-right: 1rem;
+}
+
 @media (max-width: 768px) {
   #sidebar {
     transition: left 0.5s;
@@ -193,5 +198,11 @@ nav button {
 
   .note-card {
     width: 16rem;
+  }
+
+  .home_image{
+    width: 18rem;
+    margin-top: 5rem;
+    margin-right: 0rem;
   }
 }
