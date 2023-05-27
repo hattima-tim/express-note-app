@@ -8,7 +8,7 @@ h1 {
   margin: 0px;
 }
 
-.action_icons{
+.action_icons {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -18,4 +18,10 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  #main-content h1 {
+    margin: 0px;
+  }
 }
