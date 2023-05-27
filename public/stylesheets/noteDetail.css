@@ -20,8 +20,3 @@ button {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  #main-content h1 {
-    margin: 0px;
-  }
-}
