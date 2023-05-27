@@ -10,6 +10,10 @@ body {
   height: 100%;
 }
 
+.fa-bars{
+  display: none;
+}
+
 #sidebar ul {
   list-style-type: none;
   padding: 0;
@@ -73,7 +77,7 @@ body {
   border-radius: 5px;
 }
 
-.createBtn.fixed_position{
+.createBtn.fixed_position {
   position: fixed;
   right: 2rem;
   bottom: 2rem;
@@ -106,7 +110,7 @@ svg {
   align-items: center;
 }
 
-.categoryUpdateForm button{
+.categoryUpdateForm button {
   background: none;
   border: none;
 }
@@ -145,17 +149,39 @@ svg {
   border: none;
 }
 
-#main-content nav{
+#main-content nav {
   display: flex;
   justify-content: flex-end;
-  gap:1rem;
+  gap: 1rem;
 }
 
-nav button{
+nav button {
   background-color: black;
   color: white;
   border-radius: 5px;
   border: none;
-  padding: .5rem;
+  padding: 0.5rem;
   cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  #sidebar {
+    transition:left 0.5s ;
+    left: -220px;
+  }
+
+  #main-content {
+    margin-left: 3rem;
+  }
+
+  #main-content h1 {
+    margin-top: 5rem;
+  }
+
+  .fa-bars {
+    display: block;
+    position: relative;
+    margin-top: .8rem;
+    margin-left: 15.7rem;
+  }
 }
