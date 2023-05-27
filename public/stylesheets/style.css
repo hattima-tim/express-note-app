@@ -10,7 +10,7 @@ body {
   height: 100%;
 }
 
-.fa-bars{
+.fa-bars {
   display: none;
 }
 
@@ -167,12 +167,13 @@ nav button {
 
 @media (max-width: 700px) {
   #sidebar {
-    transition:left 0.5s ;
+    transition: left 0.5s;
     left: -238px;
   }
 
   #main-content {
-    margin-left: 3rem;
+    margin-top: 2rem;
+    margin-left: 1rem;
   }
 
   #main-content h1 {
@@ -182,7 +183,14 @@ nav button {
   .fa-bars {
     display: block;
     position: relative;
-    margin-top: .8rem;
+    margin-top: 0.8rem;
     margin-left: 15.7rem;
+  }
+  .note-card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .note-card {
+    width: 16rem;
   }
 }
