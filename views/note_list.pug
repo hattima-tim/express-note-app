@@ -11,7 +11,9 @@ block content
     if notes.length===0
       div.canvas_container
         <canvas id="canvas" width="400" height="400"></canvas>
-
+    if notes.length!==0
+      h1(style="color:dimgray; text-align:center; margin-top:0px")= selectedCategory
+    
     div.note-card-container
         each note in notes
           a(href=selectedCategoryId+'/note/'+note._id)
