@@ -120,6 +120,8 @@ svg {
   width: 60%;
   height: 1.5rem;
   padding-left: 0.5rem;
+  background-color: black;
+  border-color: white;
   color: white;
 }
 
