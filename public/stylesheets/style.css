@@ -42,6 +42,11 @@ body {
   padding: 20px;
 }
 
+.note_list_header {
+  color: dimgray;
+  margin-top: 0px;
+}
+
 .note-card-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -201,6 +206,11 @@ nav button {
     margin-top: 0.8rem;
     margin-left: 15.7rem;
   }
+
+  .note_list_header {
+    text-align: center;
+  }
+
   .note-card-container {
     grid-template-columns: repeat(1, 1fr);
   }
