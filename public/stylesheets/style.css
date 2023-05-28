@@ -166,9 +166,17 @@ nav button {
   cursor: pointer;
 }
 
-.home_image{
+.home_image {
   float: right;
   margin-right: 1rem;
+}
+
+.canvas_container {
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -181,8 +189,8 @@ nav button {
     margin-left: 1rem;
   }
 
-  .home_page_header{
-    margin-top:5rem ;
+  .home_page_header {
+    margin-top: 5rem;
   }
 
   .fa-bars {
@@ -199,9 +207,14 @@ nav button {
     width: 16rem;
   }
 
-  .home_image{
+  .home_image {
     width: 18rem;
     margin-top: 13rem;
     margin-right: 0rem;
+  }
+
+  canvas {
+    width: 200px;
+    height: 200px;
   }
 }
