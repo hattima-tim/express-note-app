@@ -1,10 +1,17 @@
 extends layout
 
+block script
+  script(src="https://unpkg.com/@rive-app/canvas@1.1.9")
+  script(src='/javascripts/riveScript.js')
 block content 
 
   #sidebar-container
     include sidebar.pug
   #main-content
+    if notes.length===0
+      div.canvas_container
+        <canvas id="canvas" width="400" height="400"></canvas>
+
     div.note-card-container
         each note in notes
           a(href=selectedCategoryId+'/note/'+note._id)
